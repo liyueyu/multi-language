@@ -11,27 +11,11 @@
     "isAttribute": false
   },
   {
-    "content": "使用",
+    "content": "使用{0}APP扫描上方二维码",
     "type": "template",
     "path": "E:\\code\\cloudflow-mobile\\src\\components\\agreeConfirm\\goToMobile.vue",
     "index": [
       599,
-      601
-    ],
-    "paragraph": "使用{{cloudName}}APP扫描上方二维码",
-    "paragraphIndex": [
-      599,
-      624
-    ],
-    "isCommit": false,
-    "isAttribute": false
-  },
-  {
-    "content": "扫描上方二维码",
-    "type": "template",
-    "path": "E:\\code\\cloudflow-mobile\\src\\components\\agreeConfirm\\goToMobile.vue",
-    "index": [
-      617,
       624
     ],
     "paragraph": "使用{{cloudName}}APP扫描上方二维码",
@@ -87,27 +71,11 @@
     "isAttribute": false
   },
   {
-    "content": "请在",
+    "content": "请在{0}App中打开",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\AddressField.vue",
     "index": [
       957,
-      959
-    ],
-    "paragraph": "请在${this.cloudName}App中打开",
-    "paragraphIndex": [
-      957,
-      982
-    ],
-    "isCommit": false,
-    "isAttribute": false
-  },
-  {
-    "content": "中打开",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\AddressField.vue",
-    "index": [
-      979,
       982
     ],
     "paragraph": "请在${this.cloudName}App中打开",
@@ -135,27 +103,11 @@
     "isAttribute": false
   },
   {
-    "content": "等",
+    "content": "{0}等{1}项",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\CatalogField.vue",
     "index": [
-      1969,
-      1970
-    ],
-    "paragraph": "${fullPath}等${length}项",
-    "paragraphIndex": [
       1958,
-      1980
-    ],
-    "isCommit": false,
-    "isAttribute": false
-  },
-  {
-    "content": "项",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\CatalogField.vue",
-    "index": [
-      1979,
       1980
     ],
     "paragraph": "${fullPath}等${length}项",
@@ -281,27 +233,11 @@
     "isAttribute": false
   },
   {
-    "content": "请假时长设置最小单位为",
+    "content": "请假时长设置最小单位为{0}个小时，请修改后再提交",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\NumberField.vue",
     "index": [
       2390,
-      2401
-    ],
-    "paragraph": "请假时长设置最小单位为${this.min}个小时，请修改后再提交",
-    "paragraphIndex": [
-      2390,
-      2423
-    ],
-    "isCommit": false,
-    "isAttribute": false
-  },
-  {
-    "content": "个小时，请修改后再提交",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\NumberField.vue",
-    "index": [
-      2412,
       2423
     ],
     "paragraph": "请假时长设置最小单位为${this.min}个小时，请修改后再提交",
@@ -351,27 +287,11 @@
     "isAttribute": false
   },
   {
-    "content": "等",
+    "content": "{0}等{1}项",
     "type": "template",
     "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\SelectField\\index.vue",
     "index": [
-      620,
-      621
-    ],
-    "paragraph": "{{values[0].label}}等{{values.length}}项",
-    "paragraphIndex": [
       601,
-      639
-    ],
-    "isCommit": false,
-    "isAttribute": false
-  },
-  {
-    "content": "项",
-    "type": "template",
-    "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\SelectField\\index.vue",
-    "index": [
-      638,
       639
     ],
     "paragraph": "{{values[0].label}}等{{values.length}}项",
@@ -416,27 +336,11 @@
     "isAttribute": true
   },
   {
-    "content": "已添加",
+    "content": "已添加{0}张",
     "type": "template",
     "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\SignatureField.vue",
     "index": [
       290,
-      293
-    ],
-    "paragraph": "已添加{{selectSealItems.length}}张",
-    "paragraphIndex": [
-      290,
-      320
-    ],
-    "isCommit": false,
-    "isAttribute": false
-  },
-  {
-    "content": "张",
-    "type": "template",
-    "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\SignatureField.vue",
-    "index": [
-      319,
       320
     ],
     "paragraph": "已添加{{selectSealItems.length}}张",
@@ -624,27 +528,11 @@
     "isAttribute": false
   },
   {
-    "content": "加班控件将按天拆分成多个明细控件，最多可支持加班周期为",
+    "content": "加班控件将按天拆分成多个明细控件，最多可支持加班周期为{0}天",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\Validate\\specialDateRange.js",
     "index": [
       1214,
-      1241
-    ],
-    "paragraph": "加班控件将按天拆分成多个明细控件，最多可支持加班周期为${limitDay}天",
-    "paragraphIndex": [
-      1214,
-      1253
-    ],
-    "isCommit": false,
-    "isAttribute": false
-  },
-  {
-    "content": "天",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\Validate\\specialDateRange.js",
-    "index": [
-      1252,
       1253
     ],
     "paragraph": "加班控件将按天拆分成多个明细控件，最多可支持加班周期为${limitDay}天",
@@ -667,43 +555,11 @@
     "isAttribute": false
   },
   {
-    "content": "当前日期跨多天，每天",
+    "content": "当前日期跨多天，每天{0}时分需晚于{1}时分",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\Validate\\specialDateRange.js",
     "index": [
       1504,
-      1514
-    ],
-    "paragraph": "当前日期跨多天，每天${this.label[1]}时分需晚于${this.label[0]}时分",
-    "paragraphIndex": [
-      1504,
-      1553
-    ],
-    "isCommit": false,
-    "isAttribute": false
-  },
-  {
-    "content": "时分需晚于",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\Validate\\specialDateRange.js",
-    "index": [
-      1530,
-      1535
-    ],
-    "paragraph": "当前日期跨多天，每天${this.label[1]}时分需晚于${this.label[0]}时分",
-    "paragraphIndex": [
-      1504,
-      1553
-    ],
-    "isCommit": false,
-    "isAttribute": false
-  },
-  {
-    "content": "时分",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\Validate\\specialDateRange.js",
-    "index": [
-      1551,
       1553
     ],
     "paragraph": "当前日期跨多天，每天${this.label[1]}时分需晚于${this.label[0]}时分",
@@ -726,27 +582,11 @@
     "isAttribute": false
   },
   {
-    "content": "最小为",
+    "content": "{0}最小为1小时，请检查",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\Validate\\specialNumber.js",
     "index": [
-      710,
-      713
-    ],
-    "paragraph": "${this.label}最小为1小时，请检查",
-    "paragraphIndex": [
       697,
-      720
-    ],
-    "isCommit": false,
-    "isAttribute": false
-  },
-  {
-    "content": "小时，请检查",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\Validate\\specialNumber.js",
-    "index": [
-      714,
       720
     ],
     "paragraph": "${this.label}最小为1小时，请检查",
@@ -883,27 +723,11 @@
     "isAttribute": false
   },
   {
-    "content": "已添加",
+    "content": "已添加{0}个",
     "type": "template",
     "path": "E:\\code\\cloudflow-mobile\\src\\components\\FileField\\FileField.vue",
     "index": [
       202,
-      205
-    ],
-    "paragraph": "已添加{{showItems.length}}个",
-    "paragraphIndex": [
-      202,
-      226
-    ],
-    "isCommit": false,
-    "isAttribute": false
-  },
-  {
-    "content": "个",
-    "type": "template",
-    "path": "E:\\code\\cloudflow-mobile\\src\\components\\FileField\\FileField.vue",
-    "index": [
-      225,
       226
     ],
     "paragraph": "已添加{{showItems.length}}个",
