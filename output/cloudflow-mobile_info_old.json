@@ -14111,12 +14111,12 @@
     "isAttribute": false
   },
   {
-    "content": "不可再次编辑",
+    "content": "不可再次编辑，{0}",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\pages\\ApprovalDetail\\ApprovalHeader.vue",
     "index": [
       13022,
-      13028
+      13044
     ],
     "paragraph": "不可再次编辑，${data.message}",
     "paragraphIndex": [
@@ -14171,44 +14171,12 @@
     "isAttribute": false
   },
   {
-    "content": "您未开通/添加",
+    "content": "您未开通/添加‘携程企业商旅’应用，无法订票，是否前往开通/添加？",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\pages\\ApprovalDetail\\ApprovalHeader.vue",
     "index": [
-      15636,
-      15643
-    ],
-    "paragraph": "您未开通/添加‘携程企业商旅’应用，无法订票，是否前往开通/添加？",
-    "paragraphIndex": [
       15636,
       15669
-    ],
-    "isCommit": false,
-    "isAttribute": false
-  },
-  {
-    "content": "携程企业商旅",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\pages\\ApprovalDetail\\ApprovalHeader.vue",
-    "index": [
-      15644,
-      15650
-    ],
-    "paragraph": "您未开通/添加‘携程企业商旅’应用，无法订票，是否前往开通/添加？",
-    "paragraphIndex": [
-      15636,
-      15669
-    ],
-    "isCommit": false,
-    "isAttribute": false
-  },
-  {
-    "content": "应用，无法订票，是否前往开通/添加",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\pages\\ApprovalDetail\\ApprovalHeader.vue",
-    "index": [
-      15651,
-      15668
     ],
     "paragraph": "您未开通/添加‘携程企业商旅’应用，无法订票，是否前往开通/添加？",
     "paragraphIndex": [
@@ -14263,44 +14231,12 @@
     "isAttribute": false
   },
   {
-    "content": "您未开通/添加",
+    "content": "您未开通/添加‘携程企业商旅’应用，无法订票，请开通/添加应用后进行使用。",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\pages\\ApprovalDetail\\ApprovalHeader.vue",
     "index": [
-      16390,
-      16397
-    ],
-    "paragraph": "您未开通/添加‘携程企业商旅’应用，无法订票，请开通/添加应用后进行使用。",
-    "paragraphIndex": [
       16390,
       16427
-    ],
-    "isCommit": false,
-    "isAttribute": false
-  },
-  {
-    "content": "携程企业商旅",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\pages\\ApprovalDetail\\ApprovalHeader.vue",
-    "index": [
-      16398,
-      16404
-    ],
-    "paragraph": "您未开通/添加‘携程企业商旅’应用，无法订票，请开通/添加应用后进行使用。",
-    "paragraphIndex": [
-      16390,
-      16427
-    ],
-    "isCommit": false,
-    "isAttribute": false
-  },
-  {
-    "content": "应用，无法订票，请开通/添加应用后进行使用",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\pages\\ApprovalDetail\\ApprovalHeader.vue",
-    "index": [
-      16405,
-      16426
     ],
     "paragraph": "您未开通/添加‘携程企业商旅’应用，无法订票，请开通/添加应用后进行使用。",
     "paragraphIndex": [
@@ -14333,44 +14269,12 @@
     "isAttribute": false
   },
   {
-    "content": "您未开通",
+    "content": "您未开通‘携程企业商旅’应用，无法订票，请联系管理员开通应用后进行使用。",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\pages\\ApprovalDetail\\ApprovalHeader.vue",
     "index": [
-      16774,
-      16778
-    ],
-    "paragraph": "您未开通‘携程企业商旅’应用，无法订票，请联系管理员开通应用后进行使用。",
-    "paragraphIndex": [
       16774,
       16810
-    ],
-    "isCommit": false,
-    "isAttribute": false
-  },
-  {
-    "content": "携程企业商旅",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\pages\\ApprovalDetail\\ApprovalHeader.vue",
-    "index": [
-      16779,
-      16785
-    ],
-    "paragraph": "您未开通‘携程企业商旅’应用，无法订票，请联系管理员开通应用后进行使用。",
-    "paragraphIndex": [
-      16774,
-      16810
-    ],
-    "isCommit": false,
-    "isAttribute": false
-  },
-  {
-    "content": "应用，无法订票，请联系管理员开通应用后进行使用",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\pages\\ApprovalDetail\\ApprovalHeader.vue",
-    "index": [
-      16786,
-      16809
     ],
     "paragraph": "您未开通‘携程企业商旅’应用，无法订票，请联系管理员开通应用后进行使用。",
     "paragraphIndex": [
@@ -14403,12 +14307,12 @@
     "isAttribute": false
   },
   {
-    "content": "收藏会通过抄送功能保存至你的“抄送列表中",
+    "content": "收藏会通过抄送功能保存至你的“抄送列表中”",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\pages\\ApprovalDetail\\ApprovalHeader.vue",
     "index": [
       17324,
-      17344
+      17345
     ],
     "paragraph": "收藏会通过抄送功能保存至你的“抄送列表中”",
     "paragraphIndex": [
@@ -14430,27 +14334,11 @@
     "isAttribute": false
   },
   {
-    "content": "已选择",
+    "content": "已选择{0}人",
     "type": "template",
     "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\PersonSelectField.vue",
     "index": [
       263,
-      266
-    ],
-    "paragraph": "已选择{{fixedPersons.length ? allPersons.length : persons.length}}人",
-    "paragraphIndex": [
-      263,
-      327
-    ],
-    "isCommit": false,
-    "isAttribute": false
-  },
-  {
-    "content": "人",
-    "type": "template",
-    "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\PersonSelectField.vue",
-    "index": [
-      326,
       327
     ],
     "paragraph": "已选择{{fixedPersons.length ? allPersons.length : persons.length}}人",
@@ -14522,28 +14410,17 @@
     "isAttribute": false
   },
   {
-    "content": "版本过低，请升级至最新版本才可使用",
+    "content": "{0}版本过低，请升级至最新版本才可使用\"在角色中选择人员\"",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\PersonSelectField.vue",
     "index": [
-      12013,
-      12030
+      11996,
+      12040
     ],
     "paragraph": "${this.cloudName}版本过低，请升级至最新版本才可使用\"在角色中选择人员\"",
     "paragraphIndex": [
       11996,
       12040
-    ],
-    "isCommit": false,
-    "isAttribute": false
-  },
-  {
-    "content": "在角色中选择人员",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\PersonSelectField.vue",
-    "index": [
-      12031,
-      12039
     ],
     "isCommit": false,
     "isAttribute": false
