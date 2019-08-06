@@ -166,6 +166,18 @@ class SearchChinese {
             }
             return false
         };
+        
+        const isTemplateJsTest = (before, after) => {
+            if (type === this.type.TEMPLATE) {
+                const isAttribute = isAttributeTest(before, after)
+                if (isAttribute) {
+                    return /:\S+="(\S|\s)*$/g.test(before)
+                } else {
+                    return /{{((?!}})(\S|\s))*$/g.test(before) && /^((?!{{)(\S|\s))*}}/g.test(after)
+                }
+            }
+            return false
+        };
     
         /**
          * 查找所在的连贯语句
@@ -198,7 +210,7 @@ class SearchChinese {
                  * 排除\'\"\`后的'"`
                  * @type {string}
                  */
-                const grammar = '((?<!\\\\)`|(?<!\\\\)"|(?<!\\\\)\')'
+                const grammar = '((?<!\\\\)`|(?<!\\\\)"|(?<!\\\\)\'|(?<!\\\\)/)'
                 
                 const beforeReg = new RegExp(`${grammar}${getNoChar(grammar)}$`, 'g')
                 let beforeMatch = before.match(beforeReg)
@@ -223,20 +235,55 @@ class SearchChinese {
             return false
         };
     
-        const moreInfoArr = baseArr.map((info) => {
+        /**
+         * 替换paragraph数据中的变量为{index}格式
+         * @param type
+         * @param isAttribute
+         * @param paragraph
+         * @returns {*}
+         */
+        const replaceParagraph = ({type, isAttribute, isTemplateJs, paragraph}) => {
+            let replaceStr = paragraph
+            let reg =null
+            if (type === this.type.TEMPLATE && !isAttribute) {
+                reg = /{{(\s|\S)+?}}/
+            }
+            
+            if (type === this.type.JS || isTemplateJs) {
+                reg = /\${(\s|\S)+?}/
+            }
+            
+            
+            if (reg) {
+                let index = 0
+                while (reg.test(replaceStr)) {
+                    replaceStr = replaceStr.replace(reg, `{${index}}`)
+                    index++
+                }
+            }
+            return replaceStr
+        }
+        
+        let moreInfoArr = baseArr.map((info) => {
             const {content, index} = info;
             const [startIndex, endIndex] = index
+            
             const before = str.slice(0, startIndex);
             const after = str.slice(endIndex);
     
             const isCommit = isCommitTest(before, after)
             const isAttribute = isAttributeTest(before, after)
             const isTemplate = type === this.type.TEMPLATE || type === this.type.HTML
+            const isTemplateJs = type === this.type.TEMPLATE && isTemplateJsTest(before, after)
             
             if (!isCommit) {
-                const paragraphInfo = getParagraph(before, after, isTemplate && !isAttribute)
+                const paragraphInfo = getParagraph(before, after, isTemplate && !isTemplateJs &&  !isAttribute)
                 if (paragraphInfo) {
                     const {beforeChar, afterChar} = paragraphInfo
+                    /**
+                     * paragraph 和content不一致时
+                     * 额外记录paragraph和paragraphIndex
+                     */
                     if (beforeChar || afterChar) {
                         const paragraph = beforeChar + content + afterChar
                         const paragraphIndex = [startIndex - beforeChar.length, endIndex + afterChar.length]
@@ -245,6 +292,7 @@ class SearchChinese {
                             paragraph,
                             paragraphIndex,
                             isCommit,
+                            isTemplateJs,
                             isAttribute,
                         }
                     }
@@ -254,10 +302,29 @@ class SearchChinese {
             return {
                 ...info,
                 isCommit,
+                isTemplateJs,
                 isAttribute
             }
         });
-        
+    
+        /**
+         * 合并相同paragraph
+         * 替换相邻info中的变量
+         */
+        moreInfoArr = moreInfoArr.reduce((memory, info) => {
+            const last = memory[memory.length - 1] || {}
+            if (last.paragraph && last.paragraph === info.paragraph) {
+                console.log(replaceParagraph(info))
+                memory[memory.length - 1] = {
+                    ...last,
+                    content: replaceParagraph(info),
+                    index: info.paragraphIndex
+                }
+            } else {
+                memory.push(info)
+            }
+            return memory
+        },[]);
         // console.log(moreInfoArr)
         
         return moreInfoArr
