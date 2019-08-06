@@ -963,29 +963,17 @@
     "isAttribute": false
   },
   {
-    "content": "云之家版本过低，请升级至最新版本才可使用",
+    "content": "{0}版本过低，请升级至最新版本才可使用\"公司控件\"",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\DepartmentSelectField.vue",
     "index": [
-      4261,
-      4281
+      4244,
+      4287
     ],
     "paragraph": "${this.cloudName}云之家版本过低，请升级至最新版本才可使用\"公司控件\"",
     "paragraphIndex": [
       4244,
       4287
-    ],
-    "isCommit": false,
-    "isTemplateJs": false,
-    "isAttribute": false
-  },
-  {
-    "content": "公司控件",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\DepartmentSelectField.vue",
-    "index": [
-      4282,
-      4286
     ],
     "isCommit": false,
     "isTemplateJs": false,
@@ -1344,29 +1332,17 @@
     "isAttribute": false
   },
   {
-    "content": "版本过低，请升级至最新版本才可使用",
+    "content": "{0}版本过低，请升级至最新版本才可使用\"在角色中选择人员\"",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\PersonSelectField.vue",
     "index": [
-      12013,
-      12030
+      11996,
+      12040
     ],
     "paragraph": "${this.cloudName}版本过低，请升级至最新版本才可使用\"在角色中选择人员\"",
     "paragraphIndex": [
       11996,
       12040
-    ],
-    "isCommit": false,
-    "isTemplateJs": false,
-    "isAttribute": false
-  },
-  {
-    "content": "在角色中选择人员",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\PersonSelectField.vue",
-    "index": [
-      12031,
-      12039
     ],
     "isCommit": false,
     "isTemplateJs": false,
@@ -1479,7 +1455,7 @@
     "isAttribute": false
   },
   {
-    "content": "共{0}个控件赋值成功。 \\n共{1}个控件赋值失败。\\n\\n失败原因:\\n {2}, index) =>",
+    "content": "共{0}个控件赋值成功。 \\n共{1}个控件赋值失败。\\n\\n失败原因:\\n {2}",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\PersonSelectField.vue",
     "index": [
@@ -1508,7 +1484,7 @@
     "isAttribute": false
   },
   {
-    "content": "共{0}个控件赋值失败。\\n\\n失败原因:\\n {1}, index) =>",
+    "content": "共{0}个控件赋值失败。\\n\\n失败原因:\\n {1}",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\PersonSelectField.vue",
     "index": [
@@ -1995,12 +1971,12 @@
     "isAttribute": false
   },
   {
-    "content": "电子发票的发票状态需要为",
+    "content": "电子发票的发票状态需要为{0}",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\components\\Cells\\Validate\\specialText.js",
     "index": [
       429,
-      441
+      461
     ],
     "paragraph": "电子发票的发票状态需要为${needInvoiceStatus}",
     "paragraphIndex": [
@@ -3418,51 +3394,17 @@
     "isAttribute": false
   },
   {
-    "content": "您未开通/添加",
+    "content": "您未开通/添加‘携程企业商旅’应用，无法查看订单，是否前往开通/添加？",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\components\\Plugins\\TripDetail\\TripDetail.vue",
     "index": [
       1552,
-      1559
+      1587
     ],
     "paragraph": "您未开通/添加‘携程企业商旅’应用，无法查看订单，是否前往开通/添加？",
     "paragraphIndex": [
       1552,
       1587
-    ],
-    "isCommit": false,
-    "isTemplateJs": false,
-    "isAttribute": false
-  },
-  {
-    "content": "携程企业商旅",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\components\\Plugins\\TripDetail\\TripDetail.vue",
-    "index": [
-      1560,
-      1566
-    ],
-    "paragraph": "添加‘携程企业商旅’应用，无法查看订单，是否前往开通",
-    "paragraphIndex": [
-      1557,
-      1583
-    ],
-    "isCommit": false,
-    "isTemplateJs": false,
-    "isAttribute": false
-  },
-  {
-    "content": "应用，无法查看订单，是否前往开通/添加",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\components\\Plugins\\TripDetail\\TripDetail.vue",
-    "index": [
-      1567,
-      1586
-    ],
-    "paragraph": "添加‘携程企业商旅’应用，无法查看订单，是否前往开通/添加？',\r\n                                    cancelBtnTxt: '取消',\r\n                                    confirmBtnTxt: '确定'\r\n                                }).then(({action}) => {\r\n                                    if (action === 'confirm') {\r\n                                        appDetail({\r\n                                            appId: res.appId,\r\n                                            appName: '携程企业商旅'\r\n                                        })\r\n                                    }\r\n                                })\r\n                            } else {\r\n                                self.$alert({\r\n                                    title: '提示',\r\n                                    content: '您未开通",
-    "paragraphIndex": [
-      1557,
-      2310
     ],
     "isCommit": false,
     "isTemplateJs": false,
@@ -3517,51 +3459,17 @@
     "isAttribute": false
   },
   {
-    "content": "您未开通/添加",
+    "content": "您未开通/添加‘携程企业商旅’应用，无法查看订单，请开通/添加应用后进行使用。",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\components\\Plugins\\TripDetail\\TripDetail.vue",
     "index": [
       2306,
-      2313
+      2345
     ],
     "paragraph": "您未开通/添加‘携程企业商旅’应用，无法查看订单，请开通/添加应用后进行使用。",
     "paragraphIndex": [
       2306,
       2345
-    ],
-    "isCommit": false,
-    "isTemplateJs": false,
-    "isAttribute": false
-  },
-  {
-    "content": "携程企业商旅",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\components\\Plugins\\TripDetail\\TripDetail.vue",
-    "index": [
-      2314,
-      2320
-    ],
-    "paragraph": "添加‘携程企业商旅’应用，无法查看订单，请开通",
-    "paragraphIndex": [
-      2311,
-      2334
-    ],
-    "isCommit": false,
-    "isTemplateJs": false,
-    "isAttribute": false
-  },
-  {
-    "content": "应用，无法查看订单，请开通/添加应用后进行使用",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\components\\Plugins\\TripDetail\\TripDetail.vue",
-    "index": [
-      2321,
-      2344
-    ],
-    "paragraph": "添加‘携程企业商旅’应用，无法查看订单，请开通/添加应用后进行使用",
-    "paragraphIndex": [
-      2311,
-      2344
     ],
     "isCommit": false,
     "isTemplateJs": false,
@@ -6084,7 +5992,7 @@
     "isAttribute": false
   },
   {
-    "content": ">2019年5月4日</strong>起，对免费企业的审批数据保管服务进行调整。</p>\\n' +\r\n                '<p style=",
+    "content": "2019年5月4日",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\mixins\\upgrade-reminder.js",
     "index": [
@@ -6118,12 +6026,12 @@
     "isAttribute": false
   },
   {
-    "content": ">届时云之家免费版企业的智能审批单据将只保留6个月的存档，6个月以前的历史单据我们将根据适用法律的要求在合理的期限内删除。</p>\\n' +\r\n                '<p style=",
+    "content": "届时云之家免费版企业的智能审批单据将只保留6个月的存档，6个月以前的历史单据我们将根据适用法律的要求在合理的期限内删除。",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\mixins\\upgrade-reminder.js",
     "index": [
-      2869,
-      2967
+      2870,
+      2930
     ],
     "paragraph": ">届时云之家免费版企业的智能审批单据将只保留6个月的存档，6个月以前的历史单据我们将根据适用法律的要求在合理的期限内删除。</p>\\n' +\r\n                '<p style=",
     "paragraphIndex": [
@@ -7132,51 +7040,17 @@
     "isAttribute": false
   },
   {
-    "content": "您未开通/添加",
+    "content": "您未开通/添加‘携程企业商旅’应用，无法订票，是否前往开通/添加？",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\pages\\ApprovalDetail\\ApprovalHeader.vue",
     "index": [
       15636,
-      15643
+      15669
     ],
     "paragraph": "您未开通/添加‘携程企业商旅’应用，无法订票，是否前往开通/添加？",
     "paragraphIndex": [
       15636,
       15669
-    ],
-    "isCommit": false,
-    "isTemplateJs": false,
-    "isAttribute": false
-  },
-  {
-    "content": "携程企业商旅",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\pages\\ApprovalDetail\\ApprovalHeader.vue",
-    "index": [
-      15644,
-      15650
-    ],
-    "paragraph": "添加‘携程企业商旅’应用，无法订票，是否前往开通",
-    "paragraphIndex": [
-      15641,
-      15665
-    ],
-    "isCommit": false,
-    "isTemplateJs": false,
-    "isAttribute": false
-  },
-  {
-    "content": "应用，无法订票，是否前往开通/添加",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\pages\\ApprovalDetail\\ApprovalHeader.vue",
-    "index": [
-      15651,
-      15668
-    ],
-    "paragraph": "添加‘携程企业商旅’应用，无法订票，是否前往开通/添加？',\r\n                                    cancelBtnTxt: '取消',\r\n                                    confirmBtnTxt: '确定'\r\n                                }).then(({ action }) => {\r\n                                    if (action === 'confirm') {\r\n                                        appDetail({\r\n                                            appId: res.appId,\r\n                                            appName: '携程企业商旅'\r\n                                        })\r\n                                    }\r\n                                })\r\n                            } else {\r\n                                self.$alert({\r\n                                    title: '提示',\r\n                                    content: '您未开通",
-    "paragraphIndex": [
-      15641,
-      16394
     ],
     "isCommit": false,
     "isTemplateJs": false,
@@ -7231,51 +7105,17 @@
     "isAttribute": false
   },
   {
-    "content": "您未开通/添加",
+    "content": "您未开通/添加‘携程企业商旅’应用，无法订票，请开通/添加应用后进行使用。",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\pages\\ApprovalDetail\\ApprovalHeader.vue",
     "index": [
       16390,
-      16397
+      16427
     ],
     "paragraph": "您未开通/添加‘携程企业商旅’应用，无法订票，请开通/添加应用后进行使用。",
     "paragraphIndex": [
       16390,
       16427
-    ],
-    "isCommit": false,
-    "isTemplateJs": false,
-    "isAttribute": false
-  },
-  {
-    "content": "携程企业商旅",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\pages\\ApprovalDetail\\ApprovalHeader.vue",
-    "index": [
-      16398,
-      16404
-    ],
-    "paragraph": "添加‘携程企业商旅’应用，无法订票，请开通",
-    "paragraphIndex": [
-      16395,
-      16416
-    ],
-    "isCommit": false,
-    "isTemplateJs": false,
-    "isAttribute": false
-  },
-  {
-    "content": "应用，无法订票，请开通/添加应用后进行使用",
-    "type": "js",
-    "path": "E:\\code\\cloudflow-mobile\\src\\pages\\ApprovalDetail\\ApprovalHeader.vue",
-    "index": [
-      16405,
-      16426
-    ],
-    "paragraph": "添加‘携程企业商旅’应用，无法订票，请开通/添加应用后进行使用。',\r\n                                    confirmBtnTxt: '确认',\r\n                                    onlyAlert: true\r\n                                })\r\n                            }\r\n                        } else {\r\n                            self.$alert({\r\n                                title: '提示',\r\n                                content: '您未开通‘携程企业商旅’应用，无法订票，请联系管理员开通应用后进行使用。',\r\n                                confirmBtnTxt: '确认',\r\n                                onlyAlert: true\r\n                            })\r\n                        }\r\n                    }\r\n                })\r\n            },",
-    "paragraphIndex": [
-      16395,
-      17033
     ],
     "isCommit": false,
     "isTemplateJs": false,
@@ -14399,20 +14239,35 @@
     "isAttribute": false
   },
   {
-    "content": "(零.)*零$",
+    "content": "零",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\utils\\moneyUpperCase.js",
     "index": [
-      916,
-      923
+      917,
+      918
     ],
-    "paragraph": "(零.)*零$",
+    "paragraph": "for (var j = 0; j < unit[1].length && n > 0; j++) {\r\n            p = digit[n % 10] + unit[1][j] + p\r\n            n = Math.floor(n / 10)\r\n        }\r\n        s = p.replace(/(零.)*零$/,",
     "paragraphIndex": [
-      916,
-      923
+      745,
+      925
     ],
     "isCommit": false,
-    "isTemplateJs": false,
+    "isAttribute": false
+  },
+  {
+    "content": "零",
+    "type": "js",
+    "path": "E:\\code\\cloudflow-mobile\\src\\utils\\moneyUpperCase.js",
+    "index": [
+      921,
+      922
+    ],
+    "paragraph": "for (var j = 0; j < unit[1].length && n > 0; j++) {\r\n            p = digit[n % 10] + unit[1][j] + p\r\n            n = Math.floor(n / 10)\r\n        }\r\n        s = p.replace(/(零.)*零$/,",
+    "paragraphIndex": [
+      745,
+      925
+    ],
+    "isCommit": false,
     "isAttribute": false
   },
   {
@@ -14428,11 +14283,27 @@
     "isAttribute": false
   },
   {
-    "content": "(零.)*零元",
+    "content": "零",
     "type": "js",
     "path": "E:\\code\\cloudflow-mobile\\src\\utils\\moneyUpperCase.js",
     "index": [
-      1003,
+      1004,
+      1005
+    ],
+    "paragraph": ") + unit[0][i] + s\r\n    }\r\n    return head + s.replace(/(零.)*零元/,",
+    "paragraphIndex": [
+      947,
+      1012
+    ],
+    "isCommit": false,
+    "isAttribute": false
+  },
+  {
+    "content": "零元",
+    "type": "js",
+    "path": "E:\\code\\cloudflow-mobile\\src\\utils\\moneyUpperCase.js",
+    "index": [
+      1008,
       1010
     ],
     "paragraph": "(零.)*零元",

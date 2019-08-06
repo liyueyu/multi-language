@@ -210,7 +210,7 @@ class SearchChinese {
                  * 排除\'\"\`后的'"`
                  * @type {string}
                  */
-                const grammar = '((?<!\\\\)`|(?<!\\\\)"|(?<!\\\\)\'|(?<!\\\\)/)'
+                const grammar = '((?<!\\\\)`|(?<!\\\\)"|(?<!\\\\)\')'
                 
                 const beforeReg = new RegExp(`${grammar}${getNoChar(grammar)}$`, 'g')
                 let beforeMatch = before.match(beforeReg)
@@ -314,7 +314,6 @@ class SearchChinese {
         moreInfoArr = moreInfoArr.reduce((memory, info) => {
             const last = memory[memory.length - 1] || {}
             if (last.paragraph && last.paragraph === info.paragraph) {
-                console.log(replaceParagraph(info))
                 memory[memory.length - 1] = {
                     ...last,
                     content: replaceParagraph(info),
