@@ -1,0 +1,10 @@
+{
+  "name": "l18n",
+  "scripts": {
+    "exportJson": "node src/exportJson.js",
+    "searchJson": "node src/searchJson.js"
+  },
+  "dependencies": {
+    "async": "^3.1.0"
+  }
+}
