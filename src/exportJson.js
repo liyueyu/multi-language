@@ -22,14 +22,14 @@ utils.readFile(searchJsonFileName).then(result => {
             }
             return memory
         }, {});
-
+        
         let json = {}
         for (let content in contentMap) {
             let num = contentMap[content]
             json[utils.num2key(num)] = content
         }
         
-        fs.writeFile(exportJsonFileName, JSON.stringify(json) , 'utf8',  (err) => {
+        fs.writeFile(exportJsonFileName, JSON.stringify(json), 'utf8', (err) => {
             if (err) throw err;
             console.log(`
             生成JSON ${Object.keys(json).length} 条

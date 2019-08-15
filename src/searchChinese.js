@@ -2,7 +2,7 @@
  * 查找中文
  */
 class SearchChinese {
-    constructor() {
+    constructor () {
         this.result = []
         this.initReg()
         console.log(this.reg)
@@ -40,19 +40,19 @@ class SearchChinese {
         this.result = []
     }
     
-    searchInTemplate(filePath, str, frontIndex = 0) {
+    searchInTemplate (filePath, str, frontIndex = 0) {
         this._search(filePath, str, frontIndex, this.type.TEMPLATE)
     }
     
-    searchInHTML(filePath, str, frontIndex = 0) {
+    searchInHTML (filePath, str, frontIndex = 0) {
         this._search(filePath, str, frontIndex, this.type.HTML)
     }
     
-    searchInStyle(filePath, str, frontIndex = 0) {
+    searchInStyle (filePath, str, frontIndex = 0) {
         this._search(filePath, str, frontIndex, this.type.STYLE)
     }
     
-    searchInScript(filePath, str, frontIndex = 0) {
+    searchInScript (filePath, str, frontIndex = 0) {
         this._search(filePath, str, frontIndex, this.type.JS)
     }
     
@@ -91,7 +91,7 @@ class SearchChinese {
                 frontIndex: frontIndex
             })
         }
-        return this._getMoreInfo (str, result, type)
+        return this._getMoreInfo(str, result, type)
     }
     
     _getMoreInfo (str, baseArr, type) {
@@ -122,7 +122,7 @@ class SearchChinese {
          */
         const isAttributeTest = (before, after) => {
             if (type === this.type.TEMPLATE || type === this.type.HTML) {
-                return/<((?!>)(\S|\s))+=\s*"((?!")(\S|\s))*$/g.test(before) && /^((?!<)(\S|\s))+>/g.test(after)
+                return /<((?!>)(\S|\s))+=\s*"((?!")(\S|\s))*$/g.test(before) && /^((?!<)(\S|\s))+>/g.test(after)
             }
             return false
         };
@@ -144,7 +144,7 @@ class SearchChinese {
             }
             return false
         };
-    
+        
         /**
          * 模板属性key查找
          * 需要满足格式 key="xx"
@@ -165,7 +165,7 @@ class SearchChinese {
          * @param after
          * @returns {*}
          */
-        const getParagraph = ( before, after, isTemplate = false) => {
+        const getParagraph = (before, after, isTemplate = false) => {
             if (isTemplate) {
                 /**
                  * 获取>和<中间的内容
@@ -174,8 +174,8 @@ class SearchChinese {
                 const afterReg = /^(\S|\s)*?(?=<)/g
                 const beforeMatch = before.match(beforeReg)
                 const afterMatch = after.match(afterReg)
-                let beforeChar = beforeMatch? beforeMatch[0]: ''
-                let afterChar = afterMatch? afterMatch[0] : ''
+                let beforeChar = beforeMatch ? beforeMatch[0] : ''
+                let afterChar = afterMatch ? afterMatch[0] : ''
                 // 去除无效空格和&nbsp;
                 beforeChar = beforeChar.replace(/^(\s|&nbsp;)+/g, '')
                 afterChar = afterChar.replace(/(\s|&nbsp;)+$/g, '')
@@ -201,7 +201,7 @@ class SearchChinese {
                     
                     const afterMatch = after.match(afterReg)
                     
-                    let afterChar = afterMatch? afterMatch[0] : ''
+                    let afterChar = afterMatch ? afterMatch[0] : ''
                     beforeChar = beforeChar.replace(/^(\s|&nbsp;)+/g, '')
                     afterChar = afterChar.replace(/(\s|&nbsp;)+$/g, '')
                     return {
@@ -225,7 +225,7 @@ class SearchChinese {
             let replaceStr = paragraph
             let isReplaceParagraph = false
             let match = []
-            let reg =null
+            let reg = null
             if (type === this.type.TEMPLATE && !isAttribute) {
                 reg = /{{((\s|\S)+?)}}/
             }
@@ -284,7 +284,7 @@ class SearchChinese {
                     }
                 }
                 
-                const paragraphInfo = getParagraph(before, after, isTemplate && !isTemplateJs &&  !isAttribute)
+                const paragraphInfo = getParagraph(before, after, isTemplate && !isTemplateJs && !isAttribute)
                 if (paragraphInfo) {
                     const {beforeChar, afterChar, jsGrammar} = paragraphInfo
                     /**
@@ -293,7 +293,7 @@ class SearchChinese {
                      */
                     if (beforeChar || afterChar) {
                         const paragraph = beforeChar + content + afterChar
-                        const paragraphIndex = [dataIndex[0] - beforeChar.length, dataIndex[1]  + afterChar.length]
+                        const paragraphIndex = [dataIndex[0] - beforeChar.length, dataIndex[1] + afterChar.length]
                         moreInfo = {
                             ...moreInfo,
                             paragraph,
@@ -348,7 +348,7 @@ class SearchChinese {
                 memory.push(info)
             }
             return memory
-        },[]);
+        }, []);
         // console.log(moreInfoArr)
         
         return moreInfoArr

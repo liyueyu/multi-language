@@ -66,7 +66,7 @@ const replaceFile = (file, map, arr) => {
             const isVUE = /\.vue$/.test(path);
             const es6StringGrammar = jsGrammar === '`';
             const isIndexMatchParagraphIndex = !paragraph || (index[0] === paragraphIndex[0] && index[1] === paragraphIndex[1])
-    
+            
             let beforeChar = '', afterChar = ''
             if (!isIndexMatchParagraphIndex) {
                 beforeChar = paragraph.slice(0, index[0] - paragraphIndex[0])
@@ -78,7 +78,7 @@ const replaceFile = (file, map, arr) => {
             };
             
             let params = `('${map[content]}')`
-    
+            
             /**
              * 替换了文本的情况下
              * 添加记录的参数
@@ -86,7 +86,7 @@ const replaceFile = (file, map, arr) => {
             if (isReplaceParagraph) {
                 params += `, [${match.join(', ')}]`
             }
-    
+            
             /**
              * js语法环境
              */
@@ -120,7 +120,7 @@ const replaceFile = (file, map, arr) => {
                 } else if (attributeKey) {
                     if (isIndexMatchParagraphIndex) {
                         replace = add(`:${attributeKey}="$t`, params, '"')
-                    }else {
+                    } else {
                         replace = add(`:${attributeKey}="\`${beforeChar}\${$t`, params, `}${afterChar}\`"`)
                     }
                     beforePlace = attributeKey.length + 2 + beforeChar.length
@@ -183,7 +183,7 @@ const replaceFile = (file, map, arr) => {
             // console.log(exclude.length)
             
             // console.log(str)
-            fs.writeFile(file, str , 'utf8',  (err) => {
+            fs.writeFile(file, str, 'utf8', (err) => {
                 if (err) throw err;
                 console.log(`
                 文件${file}
@@ -211,8 +211,6 @@ const init = async () => {
         replaceFile(dir, map, addressMap[dir])
     }
 }
-
-
 
 
 init()

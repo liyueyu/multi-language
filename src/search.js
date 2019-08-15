@@ -10,7 +10,7 @@ const SearchChinese = require('./searchChinese.js');
  * @param fileArr
  * @returns {Promise<Array>}
  */
-function fileDisplay(filePath, exclude, fileArr = []) {
+function fileDisplay (filePath, exclude, fileArr = []) {
     return new Promise((resolve, reject) => {
         if (exclude.indexOf(filePath) > -1) {
             console.log('查找排除文件:', filePath)
@@ -33,7 +33,7 @@ function fileDisplay(filePath, exclude, fileArr = []) {
                         if (err) {
                             reject('读取文件目录失败', err)
                         } else {
-
+                            
                             //遍历读取到的文件列表
                             const arr = files.map(function (filename) {
                                 //获取当前文件的绝对路径
