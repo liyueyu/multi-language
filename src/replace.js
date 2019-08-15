@@ -35,26 +35,6 @@ const getFilterSearchResult = () => {
     });
 }
 
-const init = async () => {
-    const map = await getCnJson()
-    const searchResult = await getFilterSearchResult(searchDir)
-    
-    const addressMap = searchResult.reduce((memeroy, data) => {
-        if (!memeroy[data.path]) {
-            memeroy[data.path] = []
-        }
-        memeroy[data.path].push(data)
-        return memeroy
-    }, {})
-    
-    for (var dir in addressMap) {
-        // if (dir.indexOf('E:\\code\\cloudflow-mobile\\src\\components\\OpinionList\\AskOpinionList.vue') > -1) {
-            replaceFile(dir, map, addressMap[dir])
-        // }
-    }
-}
-
-
 const replaceFile = (file, map, arr) => {
     return utils.readFile(file).then(fileStr => {
         let exclude = []
@@ -64,49 +44,88 @@ const replaceFile = (file, map, arr) => {
             return include.every(({index: [s, e]}) => s > index[1] || e < index[0])
         }
         
-        const replaceStr = ({path, content, type, isTemplateJs, isAttribute, jsGrammar, index, paragraph, paragraphIndex, isReplaceParagraph, match}, map) => {
+        /**
+         * 替换文本
+         * @param path
+         * @param content
+         * @param type
+         * @param isTemplateJs
+         * @param isAttribute
+         * @param jsGrammar
+         * @param index
+         * @param paragraph
+         * @param paragraphIndex
+         * @param isReplaceParagraph
+         * @param match
+         * @param map
+         * @returns {{afterPlace: *, replace: *, beforePlace: *}}
+         */
+        const replaceStr = ({path, content, type, isTemplateJs, isAttribute, jsGrammar, index, paragraph, paragraphIndex, isReplaceParagraph, match, attributeKey}, map) => {
             let beforePlace = 0, replace, afterPlace = 0;
             
             const isVUE = /\.vue$/.test(path);
             const es6StringGrammar = jsGrammar === '`';
             const isIndexMatchParagraphIndex = !paragraph || (index[0] === paragraphIndex[0] && index[1] === paragraphIndex[1])
+    
+            let beforeChar = '', afterChar = ''
+            if (!isIndexMatchParagraphIndex) {
+                beforeChar = paragraph.slice(0, index[0] - paragraphIndex[0])
+                afterChar = paragraph.slice(index[1] - paragraphIndex[0], paragraphIndex[1] - paragraphIndex[0])
+            }
             
-            const add = (before, content, after) => {
+            const add = (before = '', content = '', after = '') => {
                 return `${before}${content}${after}`
             };
-    
-            let params = `'${map[content]}'`
             
+            let params = `('${map[content]}')`
+    
+            /**
+             * 替换了文本的情况下
+             * 添加记录的参数
+             */
             if (isReplaceParagraph) {
                 params += `, [${match.join(', ')}]`
             }
-            
+    
+            /**
+             * js语法环境
+             */
             if (jsGrammar && (type === 'js' || (type === 'template' && isTemplateJs))) {
                 if (type === 'js') {
                     if (isVUE) {
-                        replace = add('this.$t(', params, ')')
+                        replace = add('this.$t', params)
                     } else {
-                        replace = add('i18n.tc(', params, ')')
+                        replace = add('i18n.tc', params)
                     }
                 } else {
-                    replace = add('$t(', params, ')')
+                    replace = add('$t', params)
                 }
+                /**
+                 * js字符串引号处理
+                 */
                 if (isIndexMatchParagraphIndex) {
                     beforePlace = 1
                     afterPlace = 1
                 } else {
                     replace = add('\${', replace, '}')
                     if (!es6StringGrammar) {
-                        const beforeChar = paragraph.slice(0, index[0] - paragraphIndex[0])
-                        const afterChar = paragraph.slice(index[1] - paragraphIndex[0], paragraphIndex[1] - paragraphIndex[0])
                         replace = `\`${beforeChar}${replace}${afterChar}\``
                         beforePlace = 1 + beforeChar.length
                         afterPlace = 1 + afterChar.length
                     }
                 }
-               
-            } else if (type === 'template' && !isAttribute) {
-                replace = add('{{$t(', params, ')}}')
+            } else if (type === 'template') {
+                if (!isAttribute) {
+                    replace = add('{{$t', params, '}}')
+                } else if (attributeKey) {
+                    if (isIndexMatchParagraphIndex) {
+                        replace = add(`:${attributeKey}="$t`, params, '"')
+                    }else {
+                        replace = add(`:${attributeKey}="\`${beforeChar}\${$t`, params, `}${afterChar}\`"`)
+                    }
+                    beforePlace = attributeKey.length + 2 + beforeChar.length
+                    afterPlace = afterChar.length + 1
+                }
             }
             
             if (replace) {
@@ -158,11 +177,11 @@ const replaceFile = (file, map, arr) => {
             if (isJs && str.indexOf(importStr) === -1) {
                 str = `${importStr}\n${str}`
             }
-    
+            
             // console.log(arr.length, includeLen)
             // console.log(include);
             // console.log(exclude.length)
-    
+            
             // console.log(str)
             fs.writeFile(file, str , 'utf8',  (err) => {
                 if (err) throw err;
@@ -175,5 +194,25 @@ const replaceFile = (file, map, arr) => {
         }
     })
 }
+
+const init = async () => {
+    const map = await getCnJson()
+    const searchResult = await getFilterSearchResult(searchDir)
+    
+    const addressMap = searchResult.reduce((memeroy, data) => {
+        if (!memeroy[data.path]) {
+            memeroy[data.path] = []
+        }
+        memeroy[data.path].push(data)
+        return memeroy
+    }, {})
+    
+    for (let dir in addressMap) {
+        replaceFile(dir, map, addressMap[dir])
+    }
+}
+
+
+
 
 init()
