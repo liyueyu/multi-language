@@ -9,8 +9,12 @@ const utils = require('./utils.js');
  * @param fileArr
  * @returns {Promise<Array>}
  */
-function fileDisplay(filePath, fileArr = []) {
+function fileDisplay(filePath, exclude, fileArr = []) {
     return new Promise((resolve, reject) => {
+        if (exclude.indexOf(filePath) > -1) {
+            console.log('查找排除文件:', filePath)
+            return resolve(fileArr)
+        }
         //根据文件路径获取文件信息，返回一个fs.Stats对象
         fs.stat(filePath, function (error, stats) {
             if (error) {
@@ -33,7 +37,7 @@ function fileDisplay(filePath, fileArr = []) {
                             const arr = files.map(function (filename) {
                                 //获取当前文件的绝对路径
                                 const fileDir = path.join(filePath, filename);
-                                return fileDisplay(fileDir) //递归
+                                return fileDisplay(fileDir, exclude) //递归
                             });
                             Promise.all(arr).then((...dirs) => {
                                 fileArr = [].concat(...fileArr.concat(...dirs));
@@ -89,33 +93,41 @@ class SearchChinese {
         this.result = []
     }
 
-    searchInTemplate(filePath, str) {
-        this._search(filePath, str, this.type.TEMPLATE)
+    searchInTemplate(filePath, str, frontIndex = 0) {
+        this._search(filePath, str, frontIndex, this.type.TEMPLATE)
     }
 
-    searchInHTML(filePath, str) {
-        this._search(filePath, str, this.type.HTML)
+    searchInHTML(filePath, str, frontIndex = 0) {
+        this._search(filePath, str, frontIndex, this.type.HTML)
     }
     
-    searchInStyle(filePath, str) {
-        this._search(filePath, str, this.type.STYLE)
+    searchInStyle(filePath, str, frontIndex = 0) {
+        this._search(filePath, str, frontIndex, this.type.STYLE)
     }
 
-    searchInScript(filePath, str) {
-        this._search(filePath, str, this.type.JS)
+    searchInScript(filePath, str, frontIndex = 0) {
+        this._search(filePath, str, frontIndex, this.type.JS)
     }
 
-    _search (filePath, str, type) {
+    _search (filePath, str, frontIndex, type) {
         if (Array.isArray(str)) {
             str.forEach(s => {
-                this.search(filePath, s, type)
+                this.search(filePath, s, frontIndex, type)
             })
         } else if (typeof str === 'string') {
-            this.search(filePath, str, type)
+            this.search(filePath, str, frontIndex, type)
         }
     }
-
-    _searchBaseChinese (filePath, str, type) {
+    
+    /**
+     * 查找中文基础信息
+     * @param filePath
+     * @param str
+     * @param frontIndex
+     * @param type
+     * @private
+     */
+    _searchBaseChinese (filePath, str, frontIndex, type) {
         let result = [];
         let reg = this.reg;
         let m;
@@ -128,7 +140,8 @@ class SearchChinese {
                 content: m[0],
                 type: type,
                 path: filePath,
-                index: [m.index, reg.lastIndex]
+                index: [m.index, reg.lastIndex],
+                frontIndex: frontIndex
             })
         }
         return this._getMoreInfo (str, result, type)
@@ -166,12 +179,18 @@ class SearchChinese {
             }
             return false
         };
-        
+    
+        /**
+         * 查找模板内容是否是js环境
+         * @param before
+         * @param after
+         * @returns {boolean}
+         */
         const isTemplateJsTest = (before, after) => {
             if (type === this.type.TEMPLATE) {
                 const isAttribute = isAttributeTest(before, after)
                 if (isAttribute) {
-                    return /:\S+="(\S|\s)*$/g.test(before)
+                    return /:\S+="((?!")(\S|\s))*$/g.test(before)
                 } else {
                     return /{{((?!}})(\S|\s))*$/g.test(before) && /^((?!{{)(\S|\s))*}}/g.test(after)
                 }
@@ -228,7 +247,8 @@ class SearchChinese {
                     afterChar = afterChar.replace(/(\s|&nbsp;)+$/g, '')
                     return {
                         beforeChar,
-                        afterChar
+                        afterChar,
+                        jsGrammar: beforeSign
                     }
                 }
             }
@@ -244,24 +264,34 @@ class SearchChinese {
          */
         const replaceParagraph = ({type, isAttribute, isTemplateJs, paragraph}) => {
             let replaceStr = paragraph
+            let isReplaceParagraph = false
+            let match = []
             let reg =null
             if (type === this.type.TEMPLATE && !isAttribute) {
-                reg = /{{(\s|\S)+?}}/
+                reg = /{{((\s|\S)+?)}}/
             }
             
             if (type === this.type.JS || isTemplateJs) {
-                reg = /\${(\s|\S)+?}/
+                reg = /\${((\s|\S)+?)}/
             }
             
             
             if (reg) {
                 let index = 0
                 while (reg.test(replaceStr)) {
-                    replaceStr = replaceStr.replace(reg, `{${index}}`)
+                    isReplaceParagraph = true
+                    replaceStr = replaceStr.replace(reg, (m, p1) => {
+                        match.push(p1)
+                        return `{${index}}`
+                    })
                     index++
                 }
             }
-            return replaceStr
+            return {
+                isReplaceParagraph,
+                replaceStr,
+                match
+            }
         }
         
         let moreInfoArr = baseArr.map((info) => {
@@ -270,6 +300,8 @@ class SearchChinese {
             
             const before = str.slice(0, startIndex);
             const after = str.slice(endIndex);
+            
+            const dataIndex = [startIndex + info.frontIndex, endIndex + info.frontIndex]
     
             const isCommit = isCommitTest(before, after)
             const isAttribute = isAttributeTest(before, after)
@@ -279,21 +311,32 @@ class SearchChinese {
             if (!isCommit) {
                 const paragraphInfo = getParagraph(before, after, isTemplate && !isTemplateJs &&  !isAttribute)
                 if (paragraphInfo) {
-                    const {beforeChar, afterChar} = paragraphInfo
+                    const {beforeChar, afterChar, jsGrammar} = paragraphInfo
                     /**
                      * paragraph 和content不一致时
                      * 额外记录paragraph和paragraphIndex
                      */
                     if (beforeChar || afterChar) {
                         const paragraph = beforeChar + content + afterChar
-                        const paragraphIndex = [startIndex - beforeChar.length, endIndex + afterChar.length]
+                        const paragraphIndex = [dataIndex[0] - beforeChar.length, dataIndex[1]  + afterChar.length]
                         return {
                             ...info,
+                            index: dataIndex,
                             paragraph,
                             paragraphIndex,
                             isCommit,
                             isTemplateJs,
                             isAttribute,
+                            jsGrammar
+                        }
+                    } else {
+                        return {
+                            ...info,
+                            index: dataIndex,
+                            isCommit,
+                            isTemplateJs,
+                            isAttribute,
+                            jsGrammar
                         }
                     }
                 }
@@ -301,6 +344,7 @@ class SearchChinese {
             
             return {
                 ...info,
+                index: dataIndex,
                 isCommit,
                 isTemplateJs,
                 isAttribute
@@ -314,11 +358,27 @@ class SearchChinese {
         moreInfoArr = moreInfoArr.reduce((memory, info) => {
             const last = memory[memory.length - 1] || {}
             if (last.paragraph && last.paragraph === info.paragraph) {
-                memory[memory.length - 1] = {
-                    ...last,
-                    content: replaceParagraph(info),
-                    index: info.paragraphIndex
+                const {
+                    isReplaceParagraph,
+                    replaceStr,
+                    match
+                } = replaceParagraph(info)
+                if (isReplaceParagraph) {
+                    memory[memory.length - 1] = {
+                        ...last,
+                        content: replaceStr,
+                        isReplaceParagraph,
+                        match,
+                        index: info.paragraphIndex
+                    }
+                } else {
+                    memory[memory.length - 1] = {
+                        ...last,
+                        content: replaceStr,
+                        index: info.paragraphIndex
+                    }
                 }
+                
             } else {
                 memory.push(info)
             }
@@ -329,8 +389,8 @@ class SearchChinese {
         return moreInfoArr
     }
 
-    search (filePath, str, type) {
-        const result = this._searchBaseChinese(filePath, str, type);
+    search (...arg) {
+        const result = this._searchBaseChinese(...arg);
         this.addResult(result)
     }
 }
@@ -340,33 +400,37 @@ class SearchChinese {
  * @param searchDir
  * @returns {Promise<any>}
  */
-const getSearchResult = (searchDir) => {
+const getSearchResult = (searchDir, exclude) => {
     const searchChinese = new SearchChinese();
-    const scriptReg = /(?<=<script>)(\s|\S)+(?=<\/script>)/g;
-    const templateReg = /(?<=<template>)(\s|\S)+(?=<\/template>)/g;
-    const styleReg = /(?<=<style)(\s|\S)+(?=<\/style>)/g;
+    
     
     return new Promise((resolve, reject) => {
         console.log('查找的dir:', searchDir);
-        fileDisplay(searchDir).then((fileDir) => {
+        fileDisplay(searchDir, exclude).then((fileDir) => {
             console.log('找到文件数量:', fileDir.length);
+            let count = 0
             async.each(fileDir, function (file, callback) {
                 let isVUE = /\.vue$/.test(file);
                 let isJS = /\.js$/.test(file);
                 let isHTML = /\.html$/.test(file);
                 utils.readFile(file).then(data => {
                     if (isVUE) {
-                        let template = data.match(templateReg);
-                        let script = data.match(scriptReg);
-                        let style = data.match(styleReg);
-                        searchChinese.searchInTemplate(file, template);
-                        searchChinese.searchInScript(file, script);
-                        searchChinese.searchInStyle(file, style)
+                        const scriptReg = /(?<=<script>)(\s|\S)+(?=<\/script>)/g;
+                        const templateReg = /(?<=<template>)(\s|\S)+(?=<\/template>)/g;
+                        const styleReg = /(?<=<style)(\s|\S)+(?=<\/style>)/g;
+                        
+                        let template = templateReg.exec(data);
+                        let script = scriptReg.exec(data);
+                        let style = styleReg.exec(data);
+                        template && searchChinese.searchInTemplate(file, template[0], template.index);
+                        script && searchChinese.searchInScript(file, script[0], script.index);
+                        style && searchChinese.searchInStyle(file, style[0], style.index)
                     } else if (isJS) {
                         searchChinese.searchInScript(file, data)
                     } else if (isHTML) {
-                        search.searchInHTML(file, data)
+                        // searchChinese.searchInHTML(file, data)
                     }
+                    count++
                     callback()
                 }).catch(e => callback(e))
             }, function (err) {
@@ -374,7 +438,7 @@ const getSearchResult = (searchDir) => {
                     console.log('A file failed to process');
                     reject(err)
                 } else {
-                    console.log('All files have been processed successfully');
+                    console.log('查找文件数', count);
                     const result = searchChinese.getResult();
                     resolve(result)
                 }

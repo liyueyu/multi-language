@@ -31,7 +31,9 @@ utils.readFile(searchJsonFileName).then(result => {
         
         fs.writeFile(exportJsonFileName, JSON.stringify(json) , 'utf8',  (err) => {
             if (err) throw err;
-            console.log(`${exportJsonFileName} 文件已被保存`);
+            console.log(`
+            生成JSON ${Object.keys(json).length} 条
+            ${exportJsonFileName} 文件已被保存`);
         });
     } catch (e) {
         console.error('json解析错误')

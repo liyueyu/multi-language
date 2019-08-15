@@ -2,14 +2,14 @@ const fs = require('fs');
 const getSearchResult = require('./search.js');
 const config = require('../config.js');
 
-const {projectName, searchDir, outputDir, searchFileName} = config
+const {projectName, searchDir, outputDir, searchFileName, exclude} = config
 
 const searchJsonFileName = `${outputDir}/${projectName}${searchFileName}`
 
 /**
  * 获取查找结果导出json
  */
-getSearchResult(searchDir).then(result => {
+getSearchResult(searchDir, exclude).then(result => {
     const filterCommit = result.filter(({isCommit}) => !isCommit);
     const commit = result.filter(({isCommit}) => isCommit);
     const js = filterCommit.filter(({type}) => type === 'js');
