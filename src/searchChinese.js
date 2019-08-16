@@ -84,16 +84,25 @@ class SearchChinese {
                 reg.lastIndex++;
             }
             result.push({
-                content: m[0],
-                type: type,
-                path: filePath,
-                index: [m.index, reg.lastIndex],
-                frontIndex: frontIndex
+                content: m[0],                      // 内容
+                type: type,                         // 类型
+                path: filePath,                     // 路径
+                index: [m.index, reg.lastIndex],    // 开始 结束 位置
+                frontIndex: frontIndex              // 文件是vue 情况下 index + frontIndex 为文件的真实位置
             })
         }
         return this._getMoreInfo(str, result, type)
     }
     
+    /**
+     * 获取中文更多描述信息
+     * @param str
+     * @param baseArr
+     * @param type
+     * @returns {*|Promise|Promise<unknown>|Promise<any>|Uint8Array|BigInt64Array|{isAttribute, index, isTemplateJs,
+     *     isCommit}[]|Float64Array|Int8Array|Float32Array|Int32Array|Uint32Array|Uint8ClampedArray|BigUint64Array|Int16Array|Uint16Array}
+     * @private
+     */
     _getMoreInfo (str, baseArr, type) {
         
         const getNoChar = (char) => {
@@ -152,7 +161,7 @@ class SearchChinese {
          * @param after
          * @returns {*}
          */
-        const getAttributeKey = (before, after) => {
+        const getAttributeKey = (before) => {
             const attributeKey = before.match(/\S+(?==\s*"((?!")(\S|\s))*$)/g)
             return attributeKey ? attributeKey[0] : undefined
         }
@@ -267,7 +276,16 @@ class SearchChinese {
             const isAttribute = isAttributeTest(before, after)
             const isTemplate = type === this.type.TEMPLATE || type === this.type.HTML
             const isTemplateJs = isTemplateJsTest(before, after)
-            
+    
+            /**
+             * 额外信息
+             * @type {{
+             *   isAttribute: *,      是否是属性
+             *   index: *,            真实位置index
+             *   isTemplateJs: *,     是否是在template下并属于js环境
+             *   isCommit: *          是否是注释
+             * }}
+             */
             let moreInfo = {
                 index: dataIndex,
                 isCommit,
@@ -277,7 +295,13 @@ class SearchChinese {
             
             if (!isCommit) {
                 if (isTemplate && isAttribute && !isTemplateJs) {
-                    const attributeKey = getAttributeKey(before, after)
+                    const attributeKey = getAttributeKey(before)
+                    /**
+                     * 添加新属性
+                     * @type {{
+                     *  attributeKey: *   属性的key
+                     * }}
+                     */
                     moreInfo = {
                         ...moreInfo,
                         attributeKey
@@ -294,6 +318,14 @@ class SearchChinese {
                     if (beforeChar || afterChar) {
                         const paragraph = beforeChar + content + afterChar
                         const paragraphIndex = [dataIndex[0] - beforeChar.length, dataIndex[1] + afterChar.length]
+                        /**
+                         * 添加新属性
+                         * @type {{
+                         * paragraph: *,       连贯语句
+                         * jsGrammar: *,       js环境下使用的字符串语法
+                         * paragraphIndex: *,  语句所在的位置记录
+                         * }}
+                         */
                         moreInfo = {
                             ...moreInfo,
                             paragraph,
