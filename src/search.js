@@ -68,7 +68,7 @@ const getSearchResult = (searchDir, exclude) => {
             let count = 0
             async.each(fileDir, function (file, callback) {
                 let isVUE = /\.vue$/.test(file);
-                let isJS = /\.js$/.test(file);
+                let isJS = /\.(jsx?|ts)$/.test(file);
                 let isHTML = /\.html$/.test(file);
                 utils.readFile(file).then(data => {
                     if (isVUE) {
