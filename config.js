@@ -4,5 +4,6 @@ module.exports = {
     exclude: ['E:\\code\\cloudflow-mobile\\src\\utils\\moneyUpperCase.js'],   // 忽略搜索具体文件
     outputDir: 'output',   // 输出目录
     searchFileName: '_info.json',
-    exportFileName: '_zh-CN.json'
+    exportFileName: '_zh-CN.json',
+    replaceExportFile: true
 }
