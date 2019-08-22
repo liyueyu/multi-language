@@ -77,14 +77,16 @@ const replaceFile = (file, map, arr) => {
                 return `${before}${content}${after}`
             };
             
-            let params = `('${map[content]}')`
+            let params
             
             /**
              * 替换了文本的情况下
              * 添加记录的参数
              */
             if (isReplaceParagraph) {
-                params += `, [${match.join(', ')}]`
+                params = `('${map[content]}', [${match.join(', ')}])`
+            } else {
+                params = `('${map[content]}')`
             }
             
             /**
