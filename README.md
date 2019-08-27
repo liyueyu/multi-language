@@ -55,28 +55,44 @@ yarn
 执行 replace 会自动添加 `import { i18n } from 'src/lang'`
    
 ```javascript
-    import Vue from 'vue'
-    import VueI18n from 'vue-i18n'
-    import us from 'locales/cloudflow-mobile_en-US.json'
-    import cn from 'locales/cloudflow-mobile_zh-CN.json'
-    
-    Vue.use(VueI18n)
-    
-    const messages = {
-        cn: cn,
-        us: us
-    }
-    
-    // Create VueI18n instance with options
-    export const i18n = new VueI18n({
-        locale: 'us',
-        messages: messages
-    })
+ import Vue from 'vue'
+ import VueI18n from 'vue-i18n'
+ import us from 'locales/cloudflow-mobile_en-US.json'
+ import cn from 'locales/cloudflow-mobile_zh-CN.json'
+ 
+ export const lang = (() => {
+     const supports = ['zh', 'en']
+     const langs = {
+         zh: 'zh-CN',
+         en: 'en-US'
+     }
+     const userAgent = window.navigator.userAgent
+     const langExec = /lang:([\S\s]+?);/.exec(userAgent)
+     const lang = langExec ? langExec[1].trim().slice(0, 2) : supports[0]
+     return langs[lang]
+ })()
+ 
+ const messages = {
+     'zh-CN': cn,
+     'en-US': us
+ }
+ 
+ Vue.use(VueI18n)
+ // Create VueI18n instance with options
+ export const i18n = new VueI18n({
+     locale: lang,
+     messages: messages
+ })
+
 ```
 ## 已知bugs
 
 - 多个 ' " ` 混合使用替换的会有问题
 
 - vue中不能使用this.$t替换的问题
+
+    -   vue文件中的props中的各个属性的default中不要使用中文，否则替换后无法正常使用
+    -   vue文件中的filters中不要使用中文，否则替换后无法正常使用
+    -   vue文件中自定义的变量this不是指向vue实例都会有问题
  
 - 加号连接的字符串处理僵硬.
