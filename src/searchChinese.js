@@ -24,8 +24,9 @@ class SearchChinese {
      */
     initReg () {
         const han = '[\\u4e00-\\u9fa5]'
-        const symbol = '[。；，：“”（）、？《》,./]'
-        this.reg = new RegExp(`${han}(${han}|${symbol}|\\s)*${han}|${han}+`, 'g')
+        const symbol = '[。、；，：“”（）、？《》,./]'
+        const cnSymbol = '[。、；，：“”（）【】《》？！「」]'
+        this.reg = new RegExp(`${cnSymbol}*(${han}(${han}|${symbol})*|${han}+)${cnSymbol}*|${cnSymbol}`, 'g')
     }
     
     addResult (arr) {
@@ -131,7 +132,7 @@ class SearchChinese {
          */
         const isAttributeTest = (before, after) => {
             if (type === this.type.TEMPLATE || type === this.type.HTML) {
-                return /<((?!>)(\S|\s))+=\s*"((?!")(\S|\s))*$/g.test(before) && /^((?!<)(\S|\s))+>/g.test(after)
+                return /<((?!>))(\S|\s)+=\s*"((?!")(\S|\s))*$/g.test(before) && /^((?!<)(\S|\s))+>/g.test(after)
             }
             return false
         };
@@ -239,7 +240,9 @@ class SearchChinese {
                 reg = /{{((\s|\S)+?)}}/
             }
             
-            if (type === this.type.JS || isTemplateJs) {
+            if (type === this.type.JS || isTemplateJs
+                || (type === this.type.TEMPLATE && isAttribute)    
+            ) {
                 reg = /\${((\s|\S)+?)}/
             }
             
